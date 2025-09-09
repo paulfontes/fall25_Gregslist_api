@@ -18,3 +18,16 @@ export const CarSchema = new Schema({
 },
   // options object
   { timestamps: true, versionKey: false, toJSON: { virtuals: true } })
+
+CarSchema.virtual('banana').get(() => 'sandwich') // super simple, obviously can be more complex 
+
+
+CarSchema.virtual('creator', {
+  localField: 'creatorId', // 🔮 creatorId: ABC123 - take the creatorId from this car
+  ref: 'Account', // ABC123 ------> Accounts - go to the Account collection
+  foreignField: '_id', // ABC123 == _id:ABC123 - match it against the _id
+  justOne: true // only include on result
+
+})
+
+// virtuals set up with the options object need to be POPULATED when they are retrieved from the Database
