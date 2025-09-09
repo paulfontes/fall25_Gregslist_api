@@ -9,7 +9,7 @@ class PetsService {
         let sortBy = searchQuery.sort
         console.log('🛒', sortBy);
         delete searchQuery.sortBy
-        const pets = await dbContext.Pets.find(searchQuery).sort(sortBy)
+        const pets = await dbContext.Pets.find(searchQuery).sort('-age')
 
         return pets
     }
